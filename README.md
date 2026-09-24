@@ -1,27 +1,27 @@
-AI Resume Analyzer & Job Matcher
+# 🤖 AI Resume Analyzer & Job Matcher
 
-An AI-based web application designed to analyze a resume against a job description and provide useful insights for job seekers.
+An AI-powered web application that analyzes a resume against a job description and provides useful insights for job seekers.
 
-📌 Project Overview
+## 📌 Project Overview
 
-The AI Resume Analyzer helps users understand how well their resume matches a particular job role.
+AI Resume Analyzer & Job Matcher is a web-based application designed to help students and job seekers understand how well their resume matches a particular job role.
 
-The project is designed to analyze resume content, identify relevant skills and keywords, and provide a clear summary of the match.
+The application analyzes resume content, identifies relevant skills and keywords, compares them with the job description, and provides a clear matching report.
 
-✨ Planned Features
+## ✨ Features
 
-- Resume PDF upload
-- Resume text extraction
-- Job description analysis
-- Skill and keyword detection
-- Resume-job matching
-- Match score
-- Matching skills
-- Missing skills
-- Resume improvement suggestions
-- Mobile-friendly interface
+- Resume PDF Upload
+- Resume Text Extraction
+- Job Description Analysis
+- Skill and Keyword Detection
+- Resume-Job Matching
+- Match Score (0-100)
+- Matching Skills
+- Missing Skills
+- Resume Improvement Suggestions
+- Mobile-Friendly Interface
 
-🛠️ Technologies
+## 🛠️ Technologies Used
 
 - Python
 - Flask
@@ -33,22 +33,69 @@ The project is designed to analyze resume content, identify relevant skills and 
 - TF-IDF
 - Cosine Similarity
 
-🧠 Matching Approach
+## 🧠 Matching Approach
 
-The project uses text-processing and machine-learning techniques to compare resume information with a given job description.
+The project uses Natural Language Processing (NLP) and machine-learning techniques to compare the resume with the given job description.
 
-TF-IDF can be used to represent important terms, while cosine similarity can be used to measure the similarity between the resume and job description.
+### TF-IDF
 
-🎯 Objective
+TF-IDF (Term Frequency-Inverse Document Frequency) is used to represent important words from the resume and job description.
 
-The main objective is to help students and job seekers identify how closely their resume matches a target job description and understand which skills or keywords may need improvement.
+### Cosine Similarity
 
-👩‍💻 Author
+Cosine Similarity is used to measure the similarity between the resume and job description.
+
+### Match Score
+
+The similarity result is converted into a 0-100 match score to make the result easy to understand.
+
+## 🔄 Project Workflow
+
+Upload Resume  
+↓  
+Extract Resume Text  
+↓  
+Enter Job Description  
+↓  
+Analyze Skills and Keywords  
+↓  
+Calculate Similarity  
+↓  
+Generate Match Report
+
+## 📊 Analysis Output
+
+The analyzer provides:
+
+- Overall Match Score
+- Matching Skills
+- Missing Skills
+- Experience Overlap
+- Skill Language Analysis
+- Resume Improvement Suggestions
+- Relevant Keywords
+
+## 🎯 Objective
+
+The main objective of this project is to help students and job seekers:
+
+- Understand how closely their resume matches a target job.
+- Identify relevant skills and keywords.
+- Find missing skills.
+- Improve their resume based on the analysis.
+
+## 📱 User Interface
+
+The application provides a simple, clean, and mobile-friendly interface where users can upload their resume and enter a job description to receive an analysis report.
+
+## 👩‍💻 Author
 
 Bhumika Sonkusare
 
 B.Tech Computer Science Engineering (AIML)
 
-🚧 Project Status
+## 🚧 Project Status
 
 Currently under development.
+
+More improvements and features will be added in future versions.
