@@ -1,0 +1,23 @@
+kind = "web"
+previewPath = "/"
+title = "AI Resume Analyzer"
+description = "A mobile-friendly Flask web app that extracts resume text from PDFs, compares it with a job description using TF-IDF and cosine similarity, identifies matching and missing skills, and provides practical improvement suggestions."
+version = "1.0.0"
+id = "artifacts/resume-analyzer"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18646
+
+[services.development]
+run = "pnpm --filter @workspace/resume-analyzer run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/resume-analyzer", "run", "build" ]
+run = "gunicorn --chdir artifacts/resume-analyzer app:app --bind 0.0.0.0:$PORT"
+
+[services.env]
+PORT = "18646"
+BASE_PATH = "/"

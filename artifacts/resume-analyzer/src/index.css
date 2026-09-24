@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --background: 43 42% 96%;
+  --foreground: 222 35% 17%;
+  --primary: 222 35% 17%;
+  --primary-foreground: 43 42% 96%;
+  --muted: 42 23% 90%;
+  --muted-foreground: 220 15% 46%;
+  --accent: 52 94% 62%;
+  --accent-foreground: 222 35% 17%;
+  --border: 40 21% 82%;
+  --card: 43 42% 98%;
+  --card-foreground: 222 35% 17%;
+  --app-font-sans: 'Manrope', sans-serif;
+  --app-font-serif: 'Newsreader', Georgia, serif;
+  --app-font-mono: 'DM Mono', monospace;
+  --radius: 1rem;
+}
+
+@layer base {
+  * { border-color: hsl(var(--border)); }
+  body {
+    margin: 0;
+    font-family: var(--app-font-sans);
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}

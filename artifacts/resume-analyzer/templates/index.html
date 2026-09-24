@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4efe4">
+    <title>Rolewise — a clearer read on your next role</title>
+    <meta name="description" content="A calm, practical match report for your next application.">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div class="site-grain" aria-hidden="true"></div>
+    <main class="page-shell {% if analysis %}page-shell--results{% endif %}">
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="{{ url_for('index') }}" aria-label="Rolewise home">
+          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <span>rolewise</span>
+        </a>
+        <div class="topbar-right">
+          <span class="privacy-note"><span class="privacy-dot"></span>Your files stay private</span>
+          {% if analysis %}
+            <a class="nav-link" href="{{ url_for('index') }}">New analysis <span aria-hidden="true">↗</span></a>
+          {% else %}
+            <a class="nav-link" href="#how-it-works">How it works <span aria-hidden="true">↘</span></a>
+          {% endif %}
+        </div>
+      </nav>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="alert-stack" role="alert">
+            {% for category, message in messages %}
+              <div class="alert {{ category }}"><span class="alert-icon">!</span>{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      {% if not analysis %}
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="eyebrow-line"></span> Resume intelligence for humans</p>
+          <h1 id="hero-title">Make your<br><em>next move</em> clearer.</h1>
+          <p class="hero-intro">Upload your resume. Add a role you care about. Get an honest, useful read on where you already fit — and what to sharpen next.</p>
+          <div class="hero-proof">
+            <div class="avatar-stack" aria-hidden="true"><span>AM</span><span>JR</span><span>TK</span></div>
+            <p>Built for the thoughtful job search.<br><strong>No scores for your worth. Just useful signals.</strong></p>
+          </div>
+        </div>
+        <div class="hero-ornament reveal reveal-delay" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="signal-card"><span class="signal-card-label">your signal</span><strong>clearer</strong><span class="signal-card-arrow">↗</span></div>
+          <span class="ornament-word">fit<br>found</span>
+        </div>
+      </section>
+
+      <section class="workspace-section" aria-labelledby="workspace-title">
+        <div class="section-heading">
+          <div><p class="eyebrow eyebrow-dark"><span class="eyebrow-line"></span> Start with the essentials</p><h2 id="workspace-title">Two inputs.<br><em>One clearer picture.</em></h2></div>
+          <p class="section-aside">We look for the overlap between what you’ve done and what this role needs next.</p>
+        </div>
+        <form class="analysis-form" action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data">
+          <div class="input-card resume-card">
+            <div class="card-topline"><span class="step-index">01</span><span class="card-kicker">Your experience</span><span class="card-status">PDF only</span></div>
+            <h3>Bring your resume.</h3>
+            <p class="card-description">A recent, text-based PDF gives us the clearest read.</p>
+            <label class="dropzone" for="resume">
+              <input id="resume" name="resume" type="file" accept=".pdf,application/pdf" required>
+              <span class="upload-visual" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 15.5v2.25A2.25 2.25 0 0 0 7.25 20h9.5A2.25 2.25 0 0 0 19 17.75V15.5"/></svg></span>
+              <span class="dropzone-copy"><strong id="file-label">Drop your PDF here</strong><small>or <span>browse your files</span> · 10 MB max</small></span>
+              <span class="file-clear" id="file-clear" role="button" tabindex="0" hidden aria-label="Remove selected file">×</span>
+            </label>
+          </div>
+          <div class="input-card job-card">
+            <div class="card-topline"><span class="step-index">02</span><span class="card-kicker">The opportunity</span><button class="sample-link" type="button" id="sample-job">Use a sample role</button></div>
+            <h3>Tell us where you’re headed.</h3>
+            <p class="card-description">Paste the job description — the whole thing or just the good parts.</p>
+            <label class="textarea-wrap" for="job_description"><textarea id="job_description" name="job_description" maxlength="12000" minlength="40" required placeholder="Paste a job description here…">{{ form_data.job_description }}</textarea><span class="character-count" id="character-count">0 / 12,000</span></label>
+          </div>
+          <div class="form-submit-row"><p><span class="lock-mark">◌</span> Private by default. We don’t use your data to train models.</p><button class="primary-button" type="submit"><span>Read my fit</span><span class="button-arrow">↗</span></button></div>
+        </form>
+      </section>
+
+      <section class="how-section" id="how-it-works">
+        <div class="how-intro"><p class="eyebrow eyebrow-dark"><span class="eyebrow-line"></span> A gentler kind of analysis</p><h2>Clarity you<br><em>can use.</em></h2></div>
+        <div class="how-steps">
+          <article><span class="how-number">A</span><h3>See the signal</h3><p>We surface the skills and experience your resume already proves.</p></article>
+          <article><span class="how-number">B</span><h3>Spot the space</h3><p>See which requirements need a little more evidence or emphasis.</p></article>
+          <article><span class="how-number">C</span><h3>Choose your move</h3><p>Get specific edits you can make before you press apply.</p></article>
+        </div>
+      </section>
+      {% else %}
+      <section class="results-head reveal" aria-labelledby="results-title">
+        <div>
+          <p class="eyebrow eyebrow-dark"><span class="eyebrow-line"></span> Your match report</p>
+          <h1 id="results-title">A clearer read<br><em>on your fit.</em></h1>
+          <div class="file-pill"><span class="file-pill-icon">PDF</span><span>{{ analysis.filename }}</span><span class="file-pill-check">✓</span></div>
+        </div>
+        <div class="results-actions"><button class="secondary-button" type="button" id="copy-summary">Copy summary <span>↗</span></button><button class="secondary-button" type="button" id="print-report">Save report <span>↓</span></button></div>
+      </section>
+
+      <section class="score-layout reveal reveal-delay">
+        <div class="score-card">
+          <div class="score-card-label">overall fit <span aria-hidden="true">ⓘ</span></div>
+          <div class="score-ring" style="--score: {{ analysis.score }}%" aria-label="Match score {{ analysis.score }} out of 100"><div><strong>{{ analysis.score }}</strong><small>/100</small></div></div>
+          <div class="score-verdict"><span class="verdict-dot"></span><strong>{{ analysis.label }}</strong><p>{{ analysis.summary }}</p></div>
+        </div>
+        <div class="signal-overview">
+          <div class="overview-top"><div><p class="eyebrow eyebrow-dark"><span class="eyebrow-line"></span> The quick read</p><h2>You’re closer<br><em>than you think.</em></h2></div><span class="overview-count">{{ "%02d"|format(analysis.matching_skills|length) }} <small>strong signals</small></span></div>
+          <div class="signal-bars">
+            <div class="bar-row"><span>Experience overlap</span><div class="bar-track"><i style="width: {{ [analysis.score + 5, 96]|min }}%"></i></div><b>high</b></div>
+            <div class="bar-row"><span>Skill language</span><div class="bar-track"><i style="width: {{ [analysis.score - 3, 88]|min }}%"></i></div><b>good</b></div>
+            <div class="bar-row"><span>Evidence strength</span><div class="bar-track"><i style="width: {{ [analysis.score - 14, 72]|min }}%"></i></div><b>room to grow</b></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="detail-grid">
+        <div class="detail-column">
+          <div class="detail-heading"><span class="detail-marker marker-match"></span><div><p class="eyebrow eyebrow-dark">Already coming through</p><h2>Matching skills</h2></div><span class="detail-count">{{ analysis.matching_skills|length }}</span></div>
+          <div class="skill-list">{% for skill in analysis.matching_skills %}<div class="skill-row"><span>{{ "%02d"|format(loop.index) }}</span><strong>{{ skill }}</strong><i>✓</i></div>{% else %}<p class="empty-copy">No exact overlap detected yet. Read the suggestions below for a useful next step.</p>{% endfor %}</div>
+        </div>
+        <div class="detail-column missing-column">
+          <div class="detail-heading"><span class="detail-marker marker-missing"></span><div><p class="eyebrow eyebrow-dark">Worth making louder</p><h2>Missing signals</h2></div><span class="detail-count">{{ analysis.missing_skills|length }}</span></div>
+          <div class="skill-list">{% for skill in analysis.missing_skills %}<div class="skill-row"><span>{{ "%02d"|format(loop.index) }}</span><strong>{{ skill }}</strong><i>↗</i></div>{% else %}<p class="empty-copy">Nice work — every detected skill is represented.</p>{% endfor %}</div>
+        </div>
+      </section>
+
+      <section class="suggestions-section">
+        <div class="suggestions-heading"><div><p class="eyebrow eyebrow-dark"><span class="eyebrow-line"></span> Your next edit</p><h2>Small shifts<br><em>worth making.</em></h2></div><p>Not a rewrite. Just a few precise ways to help the right parts of your story get noticed.</p></div>
+        <div class="suggestion-list">{% for suggestion in analysis.suggestions %}<article class="suggestion-card"><span class="suggestion-number">{{ "%02d"|format(loop.index) }}</span><div class="suggestion-body"><span class="suggestion-tag">{{ "Signal" if loop.index == 1 else "Positioning" }}</span><h3>{{ suggestion.title }}</h3><p>{{ suggestion.body }}</p></div><span class="suggestion-arrow">↗</span></article>{% endfor %}</div>
+      </section>
+      {% if analysis.top_keywords %}<div class="keyword-note"><span>Keywords worth considering</span>{{ analysis.top_keywords|join(", ") }}</div>{% endif %}
+      <section class="results-footer"><p>One role, one point of view, one better next step.</p><a class="primary-button" href="{{ url_for('index') }}">Analyze another role <span class="button-arrow">↗</span></a></section>
+      {% endif %}
+      <footer class="site-footer"><span>rolewise <small>career clarity, without the judgment</small></span><span>Made for the next good move <b>·</b> 2025</span></footer>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
