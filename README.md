@@ -8,6 +8,10 @@ AI Resume Analyzer & Job Matcher is a web-based application designed to help stu
 
 The application analyzes resume content, identifies relevant skills and keywords, compares them with the job description, and provides a clear matching report.
 
+## 🚀 Live Demo
+
+[Open AI Resume Analyzer](https://ai-resume-analyzer-72bq.onrender.com)
+
 ## ✨ Features
 
 - Resume PDF Upload
